@@ -2,7 +2,7 @@ local Weapons = {}
 local Loaded = false
 local weaponSearch = {}
 
-for k, v in pairs(Config.RealWeapons) do
+for k, v in pairs(Config.Weapons) do
 	local name = (v.name):lower()
 	table.insert(weaponSearch, name)
 end
@@ -18,11 +18,11 @@ Citizen.CreateThread(function()
 		local playerPed = PlayerPedId()
 		local weapons = exports.ox_inventory:Search('count', weaponSearch)
 
-		for i=1, #Config.RealWeapons, 1 do
+		for i=1, #Config.Weapons, 1 do
 
-			local weaponName = Config.RealWeapons[i].name
+			local weaponName = Config.Weapons[i].name
 			local weaponHash = GetHashKey(weaponName)
-			local weaponCategory = Config.RealWeapons[i].category
+			local weaponCategory = Config.Weapons[i].category
 
 			if weapons[weaponName] and weapons[weaponName] > 0 then
 				local onPlayer = Weapons[weaponName]
@@ -57,7 +57,9 @@ Citizen.CreateThread(function()
 end)
 
 AddEventHandler('skinchanger:modelLoaded', function()
-	Citizen.Wait(30000)
+	while not ESX.PlayerData['job'] do
+		Wait()
+	end
 	if ESX.PlayerData['job'].name == 'police' or ESX.PlayerData['job'].name == 'offpolice' then
 		SetGears()
 		Loaded = true
@@ -105,7 +107,7 @@ function RemoveGears()
 end
 
 -- Add one weapon on the ped
-function SetGear(weapon, bad)
+function SetGear(weapon, usual)
 	local bone       = nil
 	local boneX      = 0.0
 	local boneY      = 0.0
@@ -115,18 +117,18 @@ function SetGear(weapon, bad)
 	local boneZRot   = 0.0
 	local playerPed  = PlayerPedId()
 	local model      = nil
-	local library 	 = bad and Config.BadRealWeapons or Config.RealWeapons
 
-	for i=1, #library, 1 do
-		if library[i].name == weapon then
-			bone     = library[i].bone
-			boneX    = library[i].x
-			boneY    = library[i].y
-			boneZ    = library[i].z
-			boneXRot = library[i].xRot
-			boneYRot = library[i].yRot
-			boneZRot = library[i].zRot
-			model    = library[i].model
+	for i=1, #Config.Weapons, 1 do
+		if Config.Weapons[i].name == weapon then
+			local library = usual and Config.Weapons[i].usual or Config.Weapons[i].officer
+			bone     = library.bone
+			boneX    = library.x
+			boneY    = library.y
+			boneZ    = library.z
+			boneXRot = library.xRot
+			boneYRot = library.yRot
+			boneZRot = library.zRot
+			model    = Config.Weapons[i].model
 			break
 		end
 	end
@@ -146,7 +148,7 @@ end
 
 -- Add all the weapons in the xPlayer's loadout
 -- on the ped
-function SetGears(bad)
+function SetGears(usual)
 	local bone       = nil
 	local boneX      = 0.0
 	local boneY      = 0.0
@@ -157,26 +159,25 @@ function SetGears(bad)
 	local playerPed  = PlayerPedId()
 	local model      = nil
 	local weapon 	 = nil
-	local weapons = exports.ox_inventory:Search('count', weaponSearch)
-	local library = bad and Config.BadRealWeapons or Config.RealWeapons
+	local weapons 	 = exports.ox_inventory:Search('count', weaponSearch)
 
-	for i=1, #library, 1 do
+	for i=1, #Config.Weapons, 1 do
 
-		local weaponName = library[i].name
+		local weaponName = Config.Weapons[i].name
 		local weaponHash = GetHashKey(weaponName)
-		local weaponCategory = library[i].category
+		local weaponCategory = Config.Weapons[i].category
 
 		if weapons[weaponName] and weapons[weaponName] > 0 then
-			
-			bone     = library[i].bone
-			boneX    = library[i].x
-			boneY    = library[i].y
-			boneZ    = library[i].z
-			boneXRot = library[i].xRot
-			boneYRot = library[i].yRot
-			boneZRot = library[i].zRot
-			model    = library[i].model
-			weapon   = library[i].name 
+			local library = usual and Config.Weapons[i].usual or Config.Weapons[i].officer
+			bone     = library.bone
+			boneX    = library.x
+			boneY    = library.y
+			boneZ    = library.z
+			boneXRot = library.xRot
+			boneYRot = library.yRot
+			boneZRot = library.zRot
+			model    = Config.Weapons[i].model
+			weapon   = Config.Weapons[i].name 
 
 			if model == '' then
 				goto here
