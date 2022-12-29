@@ -7,6 +7,176 @@ for k, v in pairs(Config.Weapons) do
 	table.insert(weaponSearch, name)
 end
 
+-- Remove only one weapon that's on the ped
+local function RemoveGear(weapon)
+	local _Weapons = {}
+
+	for weaponName, entity in pairs(Weapons) do
+		if weaponName ~= weapon then
+			_Weapons[weaponName] = entity
+		else
+			if type(entity) == 'table' then
+				for key, value in pairs(entity) do
+					SetEntityAsMissionEntity(value, true, true)
+					
+					local timeout = 2000
+					while timeout > 0 and not IsEntityAMissionEntity(value) do
+						Wait(100)
+						timeout = timeout - 100
+					end
+					DeleteEntity(value)
+				end
+			else
+				SetEntityAsMissionEntity(entity, true, true)
+		
+				local timeout = 2000
+				while timeout > 0 and not IsEntityAMissionEntity(entity) do
+					Wait(100)
+					timeout = timeout - 100
+				end
+				DeleteEntity(entity)
+			end
+		end
+	end
+
+	Weapons = _Weapons
+end
+
+-- Remove all weapons that are on the ped
+local function RemoveGears()
+	for weaponName, entity in pairs(Weapons) do
+		if type(entity) == 'table' then
+			for key, value in pairs(entity) do
+				SetEntityAsMissionEntity(value, true, true)
+				
+				local timeout = 2000
+				while timeout > 0 and not IsEntityAMissionEntity(value) do
+					Wait(100)
+					timeout = timeout - 100
+				end
+				DeleteEntity(value)
+			end
+		else
+			SetEntityAsMissionEntity(entity, true, true)
+
+			local timeout = 2000
+			while timeout > 0 and not IsEntityAMissionEntity(entity) do
+				Wait(100)
+				timeout = timeout - 100
+			end
+			DeleteEntity(entity)
+		end
+	end
+	Weapons = {}
+end
+
+-- Add one weapon on the ped
+local function SetGear(weapon, usual)
+	local bone       = nilroot
+	local boneX      = 0.0
+	local boneY      = 0.0
+	local boneZ      = 0.0
+	local boneXRot   = 0.0
+	local boneYRot   = 0.0
+	local boneZRot   = 0.0
+	local playerPed  = PlayerPedId()
+	local model      = nil
+	local magazine   = nil
+	local offset     = nil
+
+	if Weapons[weapon] then
+		return
+	end
+
+	for i=1, #Config.Weapons, 1 do
+		if Config.Weapons[i].name == weapon then
+			local library = usual and Config.Weapons[i].usual or Config.Weapons[i].officer
+			bone     = library.bone
+			boneX    = library.x
+			boneY    = library.y
+			boneZ    = library.z
+			boneXRot = library.xRot
+			boneYRot = library.yRot
+			boneZRot = library.zRot
+			model    = Config.Weapons[i].model
+			magazine = Config.Weapons[i].mag and Config.Weapons[i].mag.model
+			offset   = Config.Weapons[i].mag and (usual and Config.Weapons[i].mag.usual or Config.Weapons[i].mag.officer)
+			break
+		end
+	end
+
+	local _wait = true
+
+	ESX.Game.SpawnObject(model, {
+		x = boneX,
+		y = boneY,
+		z = boneZ
+	}, function(object)
+		local playerPed  = PlayerPedId()
+		local boneIndex = GetPedBoneIndex(playerPed, bone)
+		local bonePos 	= GetWorldPositionOfEntityBone(playerPed, boneIndex)
+		AttachEntityToEntity(object, playerPed, boneIndex, boneX, boneY, boneZ, boneXRot, boneYRot, boneZRot, false, false, false, false, 2, true)
+		if magazine then
+			local mag_boneIndex = GetEntityBoneIndexByName(object, 'gun_magazine')
+			local mag_bonePos 	= GetWorldPositionOfEntityBone(object, mag_boneIndex)
+
+			ESX.Game.SpawnObject(magazine, mag_bonePos, function(mag_obj)
+				AttachEntityToEntity(mag_obj, object, mag_boneIndex, offset.x, offset.y, offset.z, 0.0, 0.0, 0.0, false, false, false, false, 2, true)
+				Weapons[weapon] = {
+					object,
+					mag_obj
+				}
+				_wait = false
+			end)
+		else
+			Weapons[weapon] = object
+			_wait = false
+		end
+	end)
+
+	while _wait do
+		Wait()
+	end
+end
+
+local function detachAttached()
+	RemoveGears()
+	for k, v in pairs(GetGamePool('CObject')) do
+        if IsEntityAttachedToEntity(PlayerPedId(), v) then
+            SetEntityAsMissionEntity(v, true, true)
+            DetachEntity(v, true, false)
+            DeleteObject(v)
+            DeleteEntity(v)
+        end
+    end
+end
+
+-- command to normally detach weapons
+RegisterCommand('loadweapon', function()
+	TriggerEvent('realweapon')
+	TriggerEvent('skinchanger:modelLoaded')
+end)
+
+-- command to detach a stuck weapon
+RegisterCommand('detach', detachAttached)
+
+RegisterNetEvent('realweapon')
+AddEventHandler('realweapon', function()
+	RemoveGears()
+end)
+
+RegisterNetEvent('esx:removeWeapon')
+AddEventHandler('esx:removeWeapon', function(weaponName)
+	RemoveGear(weaponName)
+end)
+
+AddEventHandler('skinchanger:modelLoaded', function()
+	while not ESX.PlayerData['job'] do
+		Wait()
+	end
+	Loaded = true
+end)
+
 Citizen.CreateThread(function()
 
 	while not Loaded do
@@ -50,190 +220,17 @@ Citizen.CreateThread(function()
 						end
 					end
 				end
+				goto there
 			end
+
+			if Weapons[weaponName] then
+				RemoveGear(weaponName)
+			end
+
+			::there::
 		end
 		Citizen.Wait(500)
 	end
-end)
-
-AddEventHandler('skinchanger:modelLoaded', function()
-	while not ESX.PlayerData['job'] do
-		Wait()
-	end
-	if ESX.PlayerData['job'].name == 'police' or ESX.PlayerData['job'].name == 'offpolice' then
-		SetGears()
-		Loaded = true
-	else
-		SetGears(true)
-		Loaded = true
-	end
-end)
-
--- Remove only one weapon that's on the ped
-function RemoveGear(weapon)
-	local _Weapons = {}
-
-	for weaponName, entity in pairs(Weapons) do
-		if weaponName ~= weapon then
-			_Weapons[weaponName] = entity
-		else
-			SetEntityAsMissionEntity(entity, true, true)
-			
-			local timeout = 2000
-			while timeout > 0 and not IsEntityAMissionEntity(entity) do
-				Wait(100)
-				timeout = timeout - 100
-			end
-			DeleteEntity(entity)
-		end
-	end
-
-	Weapons = _Weapons
-end
-
--- Remove all weapons that are on the ped
-function RemoveGears()
-	for weaponName, entity in pairs(Weapons) do
-		SetEntityAsMissionEntity(entity, true, true)
-		
-		local timeout = 2000
-		while timeout > 0 and not IsEntityAMissionEntity(entity) do
-			Wait(100)
-			timeout = timeout - 100
-		end
-		DeleteEntity(entity)
-	end
-	Weapons = {}
-end
-
--- Add one weapon on the ped
-function SetGear(weapon, usual)
-	local bone       = nil
-	local boneX      = 0.0
-	local boneY      = 0.0
-	local boneZ      = 0.0
-	local boneXRot   = 0.0
-	local boneYRot   = 0.0
-	local boneZRot   = 0.0
-	local playerPed  = PlayerPedId()
-	local model      = nil
-
-	for i=1, #Config.Weapons, 1 do
-		if Config.Weapons[i].name == weapon then
-			local library = usual and Config.Weapons[i].usual or Config.Weapons[i].officer
-			bone     = library.bone
-			boneX    = library.x
-			boneY    = library.y
-			boneZ    = library.z
-			boneXRot = library.xRot
-			boneYRot = library.yRot
-			boneZRot = library.zRot
-			model    = Config.Weapons[i].model
-			break
-		end
-	end
-
-	ESX.Game.SpawnObject(model, {
-		x = boneX,
-		y = boneY,
-		z = boneZ
-	}, function(object)
-		local playerPed  = PlayerPedId()
-		local boneIndex = GetPedBoneIndex(playerPed, bone)
-		local bonePos 	= GetWorldPositionOfEntityBone(playerPed, boneIndex)
-		AttachEntityToEntity(object, playerPed, boneIndex, boneX, boneY, boneZ, boneXRot, boneYRot, boneZRot, false, false, false, false, 2, true)
-		Weapons[weapon] = object
-	end)
-end
-
--- Add all the weapons in the xPlayer's loadout
--- on the ped
-function SetGears(usual)
-	local bone       = nil
-	local boneX      = 0.0
-	local boneY      = 0.0
-	local boneZ      = 0.0
-	local boneXRot   = 0.0
-	local boneYRot   = 0.0
-	local boneZRot   = 0.0
-	local playerPed  = PlayerPedId()
-	local model      = nil
-	local weapon 	 = nil
-	local weapons 	 = exports.ox_inventory:Search('count', weaponSearch)
-
-	for i=1, #Config.Weapons, 1 do
-
-		local weaponName = Config.Weapons[i].name
-		local weaponHash = GetHashKey(weaponName)
-		local weaponCategory = Config.Weapons[i].category
-
-		if weapons[weaponName] and weapons[weaponName] > 0 then
-			local library = usual and Config.Weapons[i].usual or Config.Weapons[i].officer
-			bone     = library.bone
-			boneX    = library.x
-			boneY    = library.y
-			boneZ    = library.z
-			boneXRot = library.xRot
-			boneYRot = library.yRot
-			boneZRot = library.zRot
-			model    = Config.Weapons[i].model
-			weapon   = Config.Weapons[i].name 
-
-			if model == '' then
-				goto here
-			end
-
-			local _wait = true
-
-			ESX.Game.SpawnObject(model, {
-				x = boneX,
-				y = boneY,
-				z = boneZ
-			}, function(object)
-				local playerPed  = PlayerPedId()
-				local boneIndex = GetPedBoneIndex(playerPed, bone)
-				local bonePos 	= GetWorldPositionOfEntityBone(playerPed, boneIndex)
-
-				AttachEntityToEntity(object, playerPed, boneIndex, boneX, boneY, boneZ, boneXRot, boneYRot, boneZRot, false, false, false, false, 2, true)
-
-				Weapons[weapon] = object
-				_wait = false
-			end)
-
-			-- wait for async task
-			while _wait do
-				Citizen.Wait(10)
-			end
-		end
-		::here::
-	end
-end
-
--- command to normally detach weapons
-RegisterCommand('loadweapon', function()
-	TriggerEvent('realweapon')
-end)
-
--- command to detach a stuck weapon
-RegisterCommand('detach', function()
-    for k, v in pairs(GetGamePool('CObject')) do
-        if IsEntityAttachedToEntity(PlayerPedId(), v) then
-            SetEntityAsMissionEntity(v, true, true)
-            DetachEntity(v, true, false)
-            DeleteObject(v)
-            DeleteEntity(v)
-        end
-    end
-end)
-
-RegisterNetEvent('realweapon')
-AddEventHandler('realweapon', function()
-	RemoveGears()
-end)
-
-RegisterNetEvent('esx:removeWeapon')
-AddEventHandler('esx:removeWeapon', function(weaponName)
-	RemoveGear(weaponName)
 end)
 
 Citizen.CreateThread(function()
