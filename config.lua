@@ -1,5 +1,10 @@
 Config = {}
 
+Config.Officer = {
+    ['police'] = true,
+    ['offpolice'] = true
+}
+
 -- 'bone' use bonetag https://pastebin.com/D7JMnX1g
 -- x,y,z are offsets
 Config.Weapons = {
