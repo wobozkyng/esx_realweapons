@@ -5,6 +5,8 @@ Modified version of original esx_realweapons resource.
 - Adjustment can be configured in config file.
 ![alt text](https://cdn.discordapp.com/attachments/1057535518373584956/1057943302869090354/image.png)
 ![alt text](https://cdn.discordapp.com/attachments/1057535518373584956/1057949517615472680/image.png)
+- Performance is still fine.
+![alt text](https://cdn.discordapp.com/attachments/1057535518373584956/1058057254127022100/image.png)
 
 # esx_realweapons
 This resource makes so all your weapons become wearables.
