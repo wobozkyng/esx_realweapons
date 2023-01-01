@@ -1,6 +1,6 @@
 # Description
 Modified version of original esx_realweapons resource. 
-- Adjusted to ox_inventory compatibility.
+- Adjusted to ox_inventory compatibility (optional).
 - Added magazine object spawn and attached to weapon entity.
 - Adjustment can be configured in config file.
 ![alt text](https://cdn.discordapp.com/attachments/1057535518373584956/1057943302869090354/image.png)
