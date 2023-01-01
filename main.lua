@@ -1,11 +1,9 @@
 local Weapons = {}
 local Loaded = false
-local weaponSearch = {}
 
-for k, v in pairs(Config.Weapons) do
-	local name = (v.name):lower()
-	table.insert(weaponSearch, name)
-end
+local ox_inventory = GetResourceState('ox_inventory') == 'started' or GetResourceState('ox_inventory') == 'starting'
+
+Config.OxInventory = ox_inventory
 
 local function ForceDeleteEntity(entity)
 	SetEntityAsMissionEntity(entity, true, true)
@@ -141,8 +139,14 @@ end)
 -- command to forced detach and delete all attacehed weapons or fix crazy vehicle issue
 RegisterCommand('detach', detachAttached)
 
+CreateThread(function()
+	local weaponSearch = {}
+	
+	for k, v in pairs(Config.Weapons) do
+		local name = (v.name):lower()
+		table.insert(weaponSearch, name)
+	end
 
-Citizen.CreateThread(function()
 	while true do
 		if not ESX.PlayerLoaded then
 			detachAttached()
@@ -151,12 +155,13 @@ Citizen.CreateThread(function()
 			Wait()
 		end
 		local playerPed = PlayerPedId()
-		local weapons = exports.ox_inventory:Search('count', weaponSearch)
-		for i=1, #Config.Weapons, 1 do
+		local ox = Config.OxInventory
+		local weapons = ox and exports.ox_inventory:Search('count', weaponSearch)
+		for i = 1, #Config.Weapons do
 			local weaponName = Config.Weapons[i].name
 			local weaponHash = joaat(weaponName)
-			local weaponCategory = Config.Weapons[i].category
-			if weapons[weaponName] and weapons[weaponName] > 0 then
+			local hasWeapon = ox and weapons[weaponName] > 0 or HasPedGotWeapon(playerPed, weaponHash)
+			if hasWeapon then
 				local onPlayer = Weapons[weaponName]
 				local playerJob = ESX.PlayerData['job'].name
 				if not onPlayer and weaponHash ~= GetSelectedPedWeapon(playerPed) then
@@ -178,13 +183,20 @@ Citizen.CreateThread(function()
 			end
 			::there::
 		end
-		Citizen.Wait(500)
+		Wait(500)
 	end
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
-		Citizen.Wait(60000)
+		Wait(60000)
 		TriggerEvent('realweapon')
 	end
+end)
+
+AddEventHandler('onResourceStop', function(resourceName)
+	if resourceName ~= GetCurrentResourceName() then
+		return
+	end
+	RemoveGears()
 end)
