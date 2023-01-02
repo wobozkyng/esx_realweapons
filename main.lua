@@ -1,5 +1,22 @@
 local Weapons = {}
 local Loaded = false
+local safeESXVersion = '1.8.5' -- compatible esx-legacy version, below than this needs adjustments
+local currentESXVersion = GetResourceMetadata('es_extended', 'version', 0) or '0.0.0'
+currentESXVersion = currentESXVersion and currentESXVersion:match('%d%.%d+%.%d+')
+safeESXVersion = safeESXVersion and safeESXVersion:match('%d%.%d+%.%d+')
+
+-- adjustments for esx-legacy version below than 1.8.5
+if currentESXVersion < safeESXVersion then
+	RegisterNetEvent('esx:playerLoaded', function(xPlayer)
+        ESX.PlayerData = xPlayer
+        ESX.PlayerLoaded = true
+    end)
+
+    RegisterNetEvent('esx:onPlayerLogout', function()
+        ESX.PlayerLoaded = false
+        ESX.PlayerData = {}
+    end)
+end
 
 local ox_inventory = GetResourceState('ox_inventory') == 'started' or GetResourceState('ox_inventory') == 'starting'
 
