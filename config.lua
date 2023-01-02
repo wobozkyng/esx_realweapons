@@ -8,6 +8,28 @@ Config.Officer = {
 -- 'bone' use bonetag https://pastebin.com/D7JMnX1g
 -- x,y,z are offsets
 Config.Weapons = {
+    -- melee
+    {
+        name = 'WEAPON_DAGGER',
+        officer = { bone = 57597, x = 0.1, y = -0.13, z = -0.1, xRot = 180.0, yRot = -180.0, zRot = 0.0},
+        usual = { bone = 57597, x = 0.1, y = -0.13, z = -0.1, xRot = 180.0, yRot = -180.0, zRot = 0.0},
+        category = 'melee',
+        model = 'prop_w_me_dagger',
+    },
+    {
+        name = 'WEAPON_WRENCH',
+        officer = { bone = 57597, x = 0.1, y = -0.13, z = -0.1, xRot = 180.0, yRot = -180.0, zRot = 0.0},
+        usual = { bone = 57597, x = 0.1, y = -0.13, z = -0.1, xRot = 180.0, yRot = -180.0, zRot = 0.0},
+        category = 'melee',
+        model = 'w_me_wrench',
+    },
+    {
+        name = 'WEAPON_BATTLEAXE',
+        officer = { bone = 24818, x = 0.25, y = -0.135, z = -0.2, xRot = -180.0, yRot = 225.0, zRot = 0.0},
+        usual = { bone = 24818, x = 0.25, y = -0.135, z = -0.2, xRot = -180.0, yRot = 225.0, zRot = 0.0},
+        category = 'melee',
+        model = 'w_me_battleaxe',
+    },
 	{
         name = 'WEAPON_KNIFE',
         officer = { bone = 57597, x = 0.1, y = -0.13, z = -0.12, xRot = 180.0, yRot = -180.0, zRot = 0.0},
@@ -100,9 +122,16 @@ Config.Weapons = {
         model = 'w_me_flashlight',
     },
     {
+        name = 'WEAPON_CANDYCANE',
+        officer = { bone = 57597, x = 0.1, y = -0.13, z = -0.1, xRot = 180.0, yRot = -180.0, zRot = 0.0},
+        usual = { bone = 57597, x = 0.1, y = -0.13, z = -0.1, xRot = 180.0, yRot = -180.0, zRot = 0.0},
+        category = 'melee',
+        model = 'w_me_candy_xm3',
+    },
+    {
         name = 'WEAPON_POOLCUE',
-        officer = { bone = 24818, x = 0.25, y = -0.115, z = -0.1, xRot = -230.0, yRot = 310.0, zRot = -90.0},
-        usual = { bone = 24818, x = 0.25, y = -0.115, z = -0.1, xRot = -230.0, yRot = 310.0, zRot = -90.0},
+        officer = { bone = 24818, x = 0.25, y = -0.135, z = -0.2, xRot = -180.0, yRot = 225.0, zRot = 0.0},
+        usual = { bone = 24818, x = 0.25, y = -0.135, z = -0.2, xRot = -180.0, yRot = 225.0, zRot = 0.0},
         category = 'melee',
         model = 'w_me_poolcue',
     },
@@ -114,11 +143,32 @@ Config.Weapons = {
         model = 'w_pi_pistol',
     },
     {
+        name = 'WEAPON_PISTOLXM3',
+        officer = { bone = 51826, x = -0.01, y = 0.1, z = 0.07, xRot = -115.0, yRot = 0.0, zRot = 0.0},
+        usual = { bone = 57597, x = -0.01, y = -0.175, z = 0.0, xRot = -180.0, yRot = 135.0, zRot = 0.0},
+        category = 'handguns',
+        model = 'w_pi_pistol_xm3',
+    },
+    {
+        name = 'WEAPON_RAYPISTOL',
+        officer = { bone = 51826, x = -0.01, y = 0.1, z = 0.07, xRot = -115.0, yRot = 0.0, zRot = 0.0},
+        usual = { bone = 57597, x = -0.01, y = -0.175, z = 0.0, xRot = -180.0, yRot = 135.0, zRot = 0.0},
+        category = 'handguns',
+        model = 'w_pi_raygun',
+    },
+    {
+        name = 'WEAPON_MARKSMANPISTOL',
+        officer = { bone = 51826, x = -0.01, y = 0.1, z = 0.07, xRot = -115.0, yRot = 0.0, zRot = 0.0},
+        usual = { bone = 57597, x = 0.07, y = -0.15, z = -0.07, xRot = -180.0, yRot = 135.0, zRot = 0.0},
+        category = 'handguns',
+        model = 'w_pi_singleshot',
+    },
+    {
         name = 'WEAPON_DOUBLEACTION',
         officer = { bone = 51826, x = -0.01, y = 0.1, z = 0.07, xRot = -115.0, yRot = 0.0, zRot = 0.0},
         usual = { bone = 57597, x = -0.01, y = -0.175, z = 0.0, xRot = -180.0, yRot = 135.0, zRot = 0.0},
         category = 'handguns',
-        model = 'w_pi_w_pi_wep1_gun',
+        model = 'w_pi_wep1_gun',
     },
     {
         name = 'WEAPON_COMBATPISTOL',
@@ -130,7 +180,7 @@ Config.Weapons = {
     {
         name = 'WEAPON_APPISTOL',
         officer = { bone = 24818, x = 0.05, y = -0.135, z = 0.0, xRot = -180.0, yRot = 200.0, zRot = 0.0},
-        usual = { bone = 24818, x = 0.05, y = -0.135, z = 0.0, xRot = -180.0, yRot = 200.0, zRot = 0.0},
+        usual = { bone = 57597, x = -0.01, y = -0.175, z = 0.0, xRot = -180.0, yRot = 135.0, zRot = 0.0},
         category = 'handguns',
         model = 'w_pi_appistol',
     },
@@ -250,6 +300,18 @@ Config.Weapons = {
         }
     },
     {
+        name = 'WEAPON_COMBATPDW',
+        officer = { bone = 24818, x = 0.05, y = -0.135, z = 0.0, xRot = -180.0, yRot = 180.0, zRot = 0.0},
+        usual = { bone = 24818, x = 0.05, y = -0.135, z = 0.0, xRot = -180.0, yRot = 180.0, zRot = 0.0},
+        category = 'machine',
+        model = 'w_sb_pdw',
+        mag = {
+            model = 'w_sb_pdw_mag1',
+            officer = { x = 0.12, y = 0.0, z = 0.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
+            usual = { x = 0.12, y = 0.0, z = 0.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
+        }
+    },
+    {
         name = 'WEAPON_MG',
         officer = { bone = 24818, x = 0.05, y = -0.135, z = 0.0, xRot = -180.0, yRot = 180.0, zRot = 0.0},
         usual = { bone = 24818, x = 0.05, y = -0.135, z = 0.0, xRot = -180.0, yRot = 180.0, zRot = 0.0},
@@ -272,6 +334,25 @@ Config.Weapons = {
             officer = { x = 0.12, y = 0.0, z = 0.02, xRot = 0.0, yRot = 0.0, zRot = 0.0},
             usual = { x = 0.12, y = 0.0, z = 0.02, xRot = 0.0, yRot = 0.0, zRot = 0.0},
         }
+    },
+    {
+        name = 'WEAPON_COMBATMG_MK2',
+        officer = { bone = 24818, x = 0.05, y = -0.135, z = 0.0, xRot = -180.0, yRot = 180.0, zRot = 0.0},
+        usual = { bone = 24818, x = 0.05, y = -0.135, z = 0.0, xRot = -180.0, yRot = 180.0, zRot = 0.0},
+        category = 'machine',
+        model = 'w_mg_combatmgmk2',
+        mag = {
+            model = 'w_mg_combatmgmk2_mag1',
+            officer = { x = 0.12, y = 0.0, z = 0.02, xRot = 0.0, yRot = 0.0, zRot = 0.0},
+            usual = { x = 0.12, y = 0.0, z = 0.02, xRot = 0.0, yRot = 0.0, zRot = 0.0},
+        }
+    },
+    {
+        name = 'WEAPON_RAYCARBINE',
+        officer = { bone = 24818, x = 0.0, y = -0.135, z = 0.0, xRot = -180.0, yRot = 180.0, zRot = 0.0},
+        usual = { bone = 24818, x = 0.0, y = -0.135, z = 0.0, xRot = -180.0, yRot = 180.0, zRot = 0.0},
+        category = 'machine',
+        model = 'w_ar_srifle'
     },
     {
         name = 'WEAPON_GUSENBERG',
@@ -355,6 +436,30 @@ Config.Weapons = {
             model = 'w_ar_carbinerifle_mag1',
             officer = { x = 0.035, y = 0.0, z = 0.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
             usual = { x = 0.035, y = 0.0, z = 0.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
+        }
+    },
+    {
+        name = 'WEAPON_TACTICALRIFLE',
+        officer = { bone = 24818, x = 0.125, y = -0.175, z = -0.125, xRot = 90.0, yRot = 180.0, zRot = 0.0},
+        usual = { bone = 24818, x = 0.125, y = -0.175, z = -0.125, xRot = 90.0, yRot = 180.0, zRot = 0.0},
+        category = 'assault',
+        model = 'w_ar_carbinerifle_reh',
+        mag = {
+            model = 'w_ar_carbinerifle_mag1',
+            officer = { x = 0.035, y = 0.0, z = 0.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
+            usual = { x = 0.035, y = 0.0, z = 0.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
+        }
+    },
+    {
+        name = 'WEAPON_HEAVYRIFLE',
+        officer = { bone = 24818, x = 0.125, y = -0.175, z = -0.125, xRot = 90.0, yRot = 180.0, zRot = 0.0},
+        usual = { bone = 24818, x = 0.125, y = -0.175, z = -0.125, xRot = 90.0, yRot = 180.0, zRot = 0.0},
+        category = 'assault',
+        model = 'w_ar_heavyrifleh',
+        mag = {
+            model = 'w_sg_heavyshotgun_mag1',
+            officer = { x = 0.035, y = 0.0, z = 0.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
+            usual = { x = 0.1, y = 0.0, z = -0.04, xRot = 0.0, yRot = 0.0, zRot = 0.0},
         }
     },
     {
@@ -454,11 +559,51 @@ Config.Weapons = {
         }
     },
     {
+        name = 'WEAPON_MILITARYRIFLE',
+        officer = { bone = 24818, x = 0.2, y = -0.175, z = 0.125, xRot = 90.0, yRot = 180.0, zRot = 0.0},
+        usual = { bone = 24818, x = 0.2, y = -0.175, z = 0.125, xRot = 90.0, yRot = 180.0, zRot = 0.0},
+        category = 'assault',
+        model = 'w_ar_bullpuprifleh4',
+        mag = {
+            model = 'w_ar_bullpuprifleh4_mag1',
+            officer = { x = -0.165, y = 0.0, z = 0.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
+            usual = { x = -0.165, y = 0.0, z = 0.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
+        }
+    },
+    {
         name = 'WEAPON_PUMPSHOTGUN',
         officer = { bone = 58271, x = 0.15, y = -0.05, z = -0.1, xRot = -70.0, yRot = 0.0, zRot = 0.0},
         usual = { bone = 58271, x = 0.15, y = -0.05, z = -0.1, xRot = -70.0, yRot = 0.0, zRot = 0.0},
         category = 'shotgun',
         model = 'w_sg_pumpshotgun',
+    },
+    {
+        name = 'WEAPON_PUMPSHOTGUN_MK2',
+        officer = { bone = 58271, x = 0.15, y = -0.05, z = -0.1, xRot = -70.0, yRot = 0.0, zRot = 0.0},
+        usual = { bone = 58271, x = 0.15, y = -0.05, z = -0.1, xRot = -70.0, yRot = 0.0, zRot = 0.0},
+        category = 'shotgun',
+        model = 'w_sg_pumpshotgunmk2',
+    },
+    {
+        name = 'WEAPON_SAWNOFFSHOTGUN',
+        officer = { bone = 51826, x = -0.01, y = 0.1, z = 0.07, xRot = -115.0, yRot = 0.0, zRot = 0.0},
+        usual = { bone = 57597, x = -0.01, y = -0.175, z = 0.0, xRot = -180.0, yRot = 135.0, zRot = 0.0},
+        category = 'shotgun',
+        model = 'w_sg_sawnoff',
+    },
+    {
+        name = 'WEAPON_DBSHOTGUN',
+        officer = { bone = 51826, x = -0.01, y = 0.1, z = 0.07, xRot = -115.0, yRot = 0.0, zRot = 0.0},
+        usual = { bone = 57597, x = -0.01, y = -0.175, z = 0.0, xRot = -180.0, yRot = 135.0, zRot = 0.0},
+        category = 'shotgun',
+        model = 'w_sg_doublebarrel',
+    },
+    {
+        name = 'WEAPON_AUTOSHOTGUN',
+        officer = { bone = 51826, x = -0.01, y = 0.1, z = 0.07, xRot = -115.0, yRot = 0.0, zRot = 0.0},
+        usual = { bone = 57597, x = -0.01, y = -0.175, z = 0.0, xRot = -180.0, yRot = 135.0, zRot = 0.0},
+        category = 'shotgun',
+        model = 'w_sg_sweeper',
     },
     {
         name = 'WEAPON_BULLPUPSHOTGUN',
@@ -497,6 +642,13 @@ Config.Weapons = {
             officer = { x = 0.115, y = 0.0, z = 0.02, xRot = 0.0, yRot = 0.0, zRot = 0.0},
             usual = { x = 0.115, y = 0.0, z = 0.02, xRot = 0.0, yRot = 0.0, zRot = 0.0},
         }
+    },
+    {
+        name = 'WEAPON_COMBATSHOTGUN',
+        officer = { bone = 58271, x = 0.15, y = -0.05, z = -0.1, xRot = -70.0, yRot = 0.0, zRot = 0.0},
+        usual = { bone = 58271, x = 0.15, y = -0.05, z = -0.1, xRot = -70.0, yRot = 0.0, zRot = 0.0},
+        category = 'shotgun',
+        model = 'w_sg_pumpshotgunh4',
     },
     {
         name = 'WEAPON_SNIPERRIFLE',
@@ -559,19 +711,26 @@ Config.Weapons = {
         }
     },
     {
-        name = 'WEAPON_MILITARYRIFLE',
+        name = 'WEAPON_PRECISIONRIFLE',
         officer = { bone = 24818, x = 0.2, y = -0.175, z = 0.125, xRot = 90.0, yRot = 180.0, zRot = 0.0},
         usual = { bone = 24818, x = 0.2, y = -0.175, z = 0.125, xRot = 90.0, yRot = 180.0, zRot = 0.0},
         category = 'sniper',
-        model = 'w_ar_bullpuprifleh4',
+        model = 'w_sr_precisionrifle_reh',
         mag = {
-            model = 'w_ar_bullpuprifleh4_mag1',
-            officer = { x = -0.165, y = 0.0, z = 0.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
-            usual = { x = -0.165, y = 0.0, z = 0.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
+            model = 'w_sr_w_sr_precisionrifle_reh_mag1',
+            officer = { x = 0.115, y = 0.0, z = 0.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
+            usual = { x = 0.115, y = 0.0, z = 0.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
         }
     },
     {
         name = 'WEAPON_GRENADELAUNCHER',
+        officer = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
+        usual = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
+        category = 'heavy',
+        model = 'w_lr_grenadelauncher',
+    },
+    {
+        name = 'WEAPON_GRENADELAUNCHER_SMOKE',
         officer = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
         usual = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
         category = 'heavy',
@@ -606,11 +765,39 @@ Config.Weapons = {
         model = 'w_ar_railgun',
     },
     {
+        name = 'WEAPON_RAILGUNXM3',
+        officer = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
+        usual = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
+        category = 'heavy',
+        model = 'w_ar_railgun_xm3',
+    },
+    {
         name = 'WEAPON_HOMINGLAUNCHER',
         officer = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
         usual = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
         category = 'heavy',
         model = 'w_lr_homing',
+    },
+    {
+        name = 'WEAPON_COMPACTLAUNCHER',
+        officer = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
+        usual = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
+        category = 'heavy',
+        model = 'w_lr_compactgl',
+    },
+    {
+        name = 'WEAPON_RAYMINIGUN',
+        officer = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
+        usual = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
+        category = 'heavy',
+        model = 'w_mg_sminigun',
+    },
+    {
+        name = 'WEAPON_EMPLAUNCHER',
+        officer = { bone = 51826, x = -0.01, y = 0.1, z = 0.07, xRot = -115.0, yRot = 0.0, zRot = 0.0},
+        usual = { bone = 57597, x = -0.01, y = -0.175, z = 0.0, xRot = -180.0, yRot = 135.0, zRot = 0.0},
+        category = 'heavy',
+        model = 'w_lr_compactml',
     },
     {
         name = 'WEAPON_STICKYBOMB',
@@ -620,25 +807,18 @@ Config.Weapons = {
         model = 'prop_bomb_01_s',
     },
     {
+        name = 'WEAPON_PROXMINE',
+        officer = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
+        usual = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
+        category = 'thrown',
+        model = 'w_ex_apmine',
+    },
+    {
         name = 'WEAPON_MOLOTOV',
         officer = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
         usual = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
         category = 'thrown',
         model = 'w_ex_molotov',
-    },
-    {
-        name = 'WEAPON_FIREEXTINGUISHER',
-        officer = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
-        usual = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
-        category = 'thrown',
-        model = 'w_am_fire_exting',
-    },
-    {
-        name = 'WEAPON_PETROLCAN',
-        officer = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
-        usual = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
-        category = 'thrown',
-        model = 'w_am_jerrycan',
     },
     {
         name = 'WEAPON_SNOWBALL',
@@ -669,6 +849,20 @@ Config.Weapons = {
         model = 'w_ex_grenadesmoke',
     },
     {
+        name = 'WEAPON_FLARE',
+        officer = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
+        usual = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
+        category = 'thrown',
+        model = 'w_am_flare',
+    },
+    {
+        name = 'WEAPON_ACIDPACKAGE',
+        officer = { bone = 57597, x = 0.1, y = -0.13, z = -0.1, xRot = 180.0, yRot = -180.0, zRot = 0.0},
+        usual = { bone = 57597, x = 0.1, y = -0.13, z = -0.1, xRot = 180.0, yRot = -180.0, zRot = 0.0},
+        category = 'thrown',
+        model = 'w_am_papers_xm3',
+    },
+    {
         name = 'WEAPON_BZGAS',
         officer = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
         usual = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
@@ -676,31 +870,45 @@ Config.Weapons = {
         model = 'w_ex_grenadesmoke',
     },
     {
-        name = 'WEAPON_DAGGER',
-        officer = { bone = 57597, x = 0.1, y = -0.13, z = -0.1, xRot = 180.0, yRot = -180.0, zRot = 0.0},
-        usual = { bone = 57597, x = 0.1, y = -0.13, z = -0.1, xRot = 180.0, yRot = -180.0, zRot = 0.0},
-        category = 'others',
-        model = 'prop_w_me_dagger',
-    },
-    {
-        name = 'WEAPON_BATTLEAXE',
-        officer = { bone = 24818, x = 0.25, y = -0.135, z = -0.2, xRot = -180.0, yRot = 225.0, zRot = 0.0},
-        usual = { bone = 24818, x = 0.25, y = -0.135, z = -0.2, xRot = -180.0, yRot = 225.0, zRot = 0.0},
-        category = 'others',
-        model = 'w_me_battleaxe',
-    },
-    {
         name = 'WEAPON_PIPEBOMB',
         officer = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
         usual = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
-        category = 'others',
+        category = 'thrown',
         model = 'w_ex_pipebomb',
     },
     {
-        name = 'WEAPON_WRENCH',
+        name = 'WEAPON_PETROLCAN',
         officer = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
         usual = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
         category = 'others',
-        model = 'w_me_wrench',
+        model = 'w_am_jerrycan',
+    },
+    {
+        name = 'WEAPON_HAZARDCAN',
+        officer = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
+        usual = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
+        category = 'others',
+        model = 'w_ch_jerrycan',
+    },
+    {
+        name = 'WEAPON_FERTILIZERCAN',
+        officer = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
+        usual = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
+        category = 'others',
+        model = 'w_am_jerrycan_sf',
+    },
+    {
+        name = 'WEAPON_FIREEXTINGUISHER',
+        officer = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
+        usual = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
+        category = 'others',
+        model = 'w_am_fire_exting',
+    },
+    {
+        name = 'WEAPON_METALDETECTOR',
+        officer = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
+        usual = { bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0},
+        category = 'others',
+        model = 'w_am_digiscanner',
     }
 }
