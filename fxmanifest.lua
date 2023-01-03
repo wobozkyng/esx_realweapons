@@ -3,7 +3,7 @@ use_experimental_fxv2_oal 'yes'
 lua54 'yes'
 game 'gta5'
 
-version '1.1.1'
+version '1.1.2'
 description 'esx_realweapons with slight improvement and added ox_inventory compatibility'
 
 dependencies {
